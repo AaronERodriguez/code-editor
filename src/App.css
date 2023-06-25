@@ -4,3 +4,9 @@
 .editor-container{
   padding-top: 0.4%;
 }
+#html:hover, #css:hover, #js:hover {
+  background-color: lightgray;
+}
+.active {
+  background-color: #E8E8E8;
+}
