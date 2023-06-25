@@ -40,43 +40,48 @@ function App() {
 
   return (
     <div className="App">
-      <Slider onclick={() => {changeSiteTheme(siteTheme)}} />
-      <h1>Code Editor</h1>
-      <div className='button-container'>
-        <Button className={`${active === "html" ? "active-" + siteTheme : siteTheme}`} title="HTML" onclick={() => {
-          onTabClick("html")}} id="html" />
-        <Button className={`${active === "css" ? "active-" + siteTheme: siteTheme}`} title="CSS" onclick={() => {
-          onTabClick("css")}}id="css" />
-        <Button className={`${active === "js" ? "active-" + siteTheme: siteTheme}`} title="JavaScript" onclick={() => {
-          onTabClick("js")}} id="js" />  
-      </div>
-      <div className='code-container'>
-        <div className='editor-container'>
-            {
-              openedEditor === "html" ? (
-                <Code language="xml"
-                value={html}
-                setEditorState={setHtml} />
-              ) : openedEditor === "css" ? (
-                <Code language="css"
-                value={css}
-                setEditorState={setCss} />
-              ) : (
-                <Code language="javascript"
-                value={js}
-                setEditorState={setJs} />
-              )
-            }
+      <label className='slider-container'>
+        <Slider onclick={() => {changeSiteTheme(siteTheme)}} />
+        <h2>{siteTheme[0].toUpperCase() + siteTheme.substring(1)}</h2>
+      </label>
+      <div className='code'>
+        <h1>Code Editor</h1>
+        <div className='button-container'>
+          <Button className={`${active === "html" ? "active-" + siteTheme : siteTheme}`} title="HTML" onclick={() => {
+            onTabClick("html")}} id="html" />
+          <Button className={`${active === "css" ? "active-" + siteTheme: siteTheme}`} title="CSS" onclick={() => {
+            onTabClick("css")}}id="css" />
+          <Button className={`${active === "js" ? "active-" + siteTheme: siteTheme}`} title="JavaScript" onclick={() => {
+            onTabClick("js")}} id="js" />  
         </div>
-        <div style={{"backgroundColor": "white"}}>
-          <iframe
-            srcDoc={srcDoc}
-            title="output"
-            sandbox="allow-scripts"
-            frameBorder="1"
-            width="100%"
-            height="100%"
-          />
+        <div className='code-container'>
+          <div className='editor-container'>
+              {
+                openedEditor === "html" ? (
+                  <Code language="xml"
+                  value={html}
+                  setEditorState={setHtml} />
+                ) : openedEditor === "css" ? (
+                  <Code language="css"
+                  value={css}
+                  setEditorState={setCss} />
+                ) : (
+                  <Code language="javascript"
+                  value={js}
+                  setEditorState={setJs} />
+                )
+              }
+          </div>
+          <div style={{"backgroundColor": "white"}}>
+            <iframe
+              srcDoc={srcDoc}
+              title="output"
+              sandbox="allow-scripts"
+              frameBorder="1"
+              width="100%"
+              height="100%"
+            />
+          </div>
         </div>
       </div>
     </div>
