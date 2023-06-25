@@ -3,9 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Button from './Components/Button'
+import Code from './Components/Code'
 
 function App() {
   const [openedEditor, setOpenedEditor] = useState("html");
+  const [html, setHtml] = useState('');
+  const [css, setCss] = useState('');
+  const [js, setJs] = useState('');
 
   const onTabClick = editorName => {
     setOpenedEditor(editorName);
@@ -25,11 +29,17 @@ function App() {
       <div className='editor-container'>
           {
             openedEditor === "html" ? (
-              <p>The html editor is open</p>
+              <Code language="xml"
+              value={html}
+              setEditorState={setHtml} />
             ) : openedEditor === "css" ? (
-              <p>The CSS editor is open!!!!!!</p>
+              <Code language="css"
+              value={css}
+              setEditorState={setCss} />
             ) : (
-              <p>The JavaScript editor is open</p>
+              <Code language="javascript"
+              value={js}
+              setEditorState={setJs} />
             )
           }
       </div>
