@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Button from './Components/Button'
 import Code from './Components/Code'
+import Slider from './Components/Slider'
 
 function App() {
   const [openedEditor, setOpenedEditor] = useState("html");
+  const [siteTheme, setSiteTheme] = useState("dark");
   const [active, setActive] = useState("html");
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');
@@ -16,7 +18,12 @@ function App() {
     setActive(editorName)
   };
 
+  const changeSiteTheme = currentTheme => {
+    currentTheme === "dark" ? setSiteTheme("light") : setSiteTheme("dark");
+  }
+
   useEffect(() => {
+    document.body.setAttribute("class", siteTheme)
     const timeOut = setTimeout(() => {
       setSrcDoc(
         `
@@ -29,18 +36,19 @@ function App() {
       )
     }, 250);
     return () => clearTimeout(timeOut)
-  }, [html, css, js])
+  }, [html, css, js, siteTheme])
 
   return (
-    <div className='App'>
+    <div className="App">
+      <Slider onclick={() => {changeSiteTheme(siteTheme)}} />
       <h1>Code Editor</h1>
       <div className='button-container'>
-        <Button className={active === "html" ? "active": ""} title="HTML" onclick={() => {
+        <Button className={`${active === "html" ? "active-" + siteTheme : siteTheme}`} title="HTML" onclick={() => {
           onTabClick("html")}} id="html" />
-        <Button className={active === "css" ? "active": ""} title="CSS" onclick={() => {
-          onTabClick("css")}}id="css"/>
-        <Button className={active === "js" ? "active": ""} title="JavaScript" onclick={() => {
-          onTabClick("js")}} id="js"/>  
+        <Button className={`${active === "css" ? "active-" + siteTheme: siteTheme}`} title="CSS" onclick={() => {
+          onTabClick("css")}}id="css" />
+        <Button className={`${active === "js" ? "active-" + siteTheme: siteTheme}`} title="JavaScript" onclick={() => {
+          onTabClick("js")}} id="js" />  
       </div>
       <div className='code-container'>
         <div className='editor-container'>
@@ -60,7 +68,7 @@ function App() {
               )
             }
         </div>
-        <div>
+        <div style={{"backgroundColor": "white"}}>
           <iframe
             srcDoc={srcDoc}
             title="output"

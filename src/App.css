@@ -4,9 +4,23 @@
 .editor-container{
   padding-top: 0.4%;
 }
-#html:hover, #css:hover, #js:hover {
-  background-color: lightgray;
+.active-light {
+  background-color: #e1e1e1;
 }
-.active {
-  background-color: #E8E8E8;
+.active-dark {
+  background-color: #6e717e;
+}
+.dark {
+  background-color: #202124;
+  color: white;
+}
+.light {
+  background-color: white;
+  color: #202124;
+}
+button.dark:hover, button.active-dark:hover {
+  background-color: #7d808e;
+}
+button.light:hover, button.active-light:hover {
+  background-color: lightgray;
 }
